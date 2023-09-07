@@ -19,5 +19,5 @@ public class CreateLicitatiiDTO {
     [Required]
     public int PretRezervare {get; set; }   
     [Required]
-    public DateTime LicitatieEnd {get; set;}
+    public DateTime LicitatieEnd { get; set; }
 }

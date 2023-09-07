@@ -1,3 +1,6 @@
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 using AutoMapper;
 using LicitatiiService.Data;
 using LicitatiiService.DTO;
@@ -32,14 +35,54 @@ public class LicitatiiController : ControllerBase {
         return _mapper.Map<LicitatiiDTO>(licitatii);
     }
     [HttpPost]
-    public async Task<ActionResult<LicitatiiDTO>> CreateLicitatie(LicitatiiDTO licitatieDto){
+     [Route("create")]
+    public async Task<ActionResult<LicitatiiDTO>> CreateLicitatie(CreateLicitatiiDTO licitatieDto){
         var licitatie = _mapper.Map<Licitatie>(licitatieDto);
-        licitatie.Vanzator ="test";
+        licitatie.Vanzator ="Ionut";
         _context.Licitatii.Add(licitatie);
         var result = await _context.SaveChangesAsync() > 0 ;
         if (!result){
             return BadRequest("Nu a fost adaugat nimic!");
         }
         return CreatedAtAction(nameof(LicitatieDupaID), new {licitatie.Id}, _mapper.Map<LicitatiiDTO>(licitatie));
+     
+    }
+    [HttpPut("{id}")]
+    public async Task<ActionResult> UpdateLicitatie(UpdateLicitatiiDTO licitatieDTO, Guid id) {
+    var licitatie = await _context.Licitatii.Include(x => x.Item).FirstOrDefaultAsync(x => x.Id == id);
+    
+    if (licitatie != null) {
+       
+        licitatie.Item.Make = licitatieDTO.Make ?? licitatie.Item.Make;
+        licitatie.Item.ModelMasina = licitatieDTO.ModelMasina ?? licitatie.Item.ModelMasina;
+        licitatie.Item.Culoare = licitatieDTO.Culoare ?? licitatie.Item.Culoare;
+        licitatie.Item.Kilometraj = licitatieDTO.Kilometraj ?? licitatie.Item.Kilometraj;
+        licitatie.Item.An = licitatieDTO.An ?? licitatie.Item.An;
+    
+        var result = await _context.SaveChangesAsync() > 0;
+        
+        if (!result) {
+            return BadRequest("Nu s-a facut modificarea");
+        }
+        
+        return Ok();
+    } else {
+        return NotFound();
+    }
+}
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteLicitatie(Guid id){
+        var licitatie = await _context.Licitatii.FirstOrDefaultAsync(x=>x.Id == id);
+        if (licitatie == null) {
+            return BadRequest("Nu s-a gasit licitatia");
+        }
+        _context.Licitatii.Remove(licitatie);
+        var result = _context.SaveChangesAsync();
+        if (result != null){
+            return Ok();
+        }
+        else{
+            return BadRequest("Nu s-a sters licitatia.");
+        }
     }
 }

@@ -10,11 +10,11 @@ public class UpdateLicitatiiDTO {
     [Required]
     public string ModelMasina { get; set; }
     [Required]
-    public int An { get; set; }
+    public int? An { get; set; }
     [Required]
     public string Culoare { get; set; }
     [Required]
-    public int Kilometraj { get; set; }
+    public int? Kilometraj { get; set; }
     
    
 }

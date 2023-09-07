@@ -1,4 +1,6 @@
 using LicitatiiService.Data;
+using LicitatiiService.DTO;
+using LicitatiiService.RequestHelpers;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddMvc().AddJsonOptions(opt => {
     opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
 });
+
 var app = builder.Build();
 
 app.UseAuthorization();
