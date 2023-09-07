@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ionut.plesescu\\Desktop\\MasinaTa\\src\\LicitatiiService\\LicitatiiService.csproj": {}
+    "c:\\Users\\ionut.plesescu\\Desktop\\MasinaTa\\src\\LicitatiiService\\LicitatiiService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ionut.plesescu\\Desktop\\MasinaTa\\src\\LicitatiiService\\LicitatiiService.csproj": {
+    "c:\\Users\\ionut.plesescu\\Desktop\\MasinaTa\\src\\LicitatiiService\\LicitatiiService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ionut.plesescu\\Desktop\\MasinaTa\\src\\LicitatiiService\\LicitatiiService.csproj",
+        "projectUniqueName": "c:\\Users\\ionut.plesescu\\Desktop\\MasinaTa\\src\\LicitatiiService\\LicitatiiService.csproj",
         "projectName": "LicitatiiService",
-        "projectPath": "C:\\Users\\ionut.plesescu\\Desktop\\MasinaTa\\src\\LicitatiiService\\LicitatiiService.csproj",
+        "projectPath": "c:\\Users\\ionut.plesescu\\Desktop\\MasinaTa\\src\\LicitatiiService\\LicitatiiService.csproj",
         "packagesPath": "C:\\Users\\ionut.plesescu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ionut.plesescu\\Desktop\\MasinaTa\\src\\LicitatiiService\\obj\\",
+        "outputPath": "c:\\Users\\ionut.plesescu\\Desktop\\MasinaTa\\src\\LicitatiiService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -59,6 +59,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.10, )"
+            },
+            "MongoDB.Entities": {
+              "target": "Package",
+              "version": "[22.1.0, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",

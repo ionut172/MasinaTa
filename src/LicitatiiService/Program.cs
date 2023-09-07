@@ -2,7 +2,8 @@ using LicitatiiService.Data;
 using LicitatiiService.DTO;
 using LicitatiiService.RequestHelpers;
 using Microsoft.EntityFrameworkCore;
-
+using MongoDB.Driver;
+using MongoDB.Entities;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -15,7 +16,7 @@ builder.Services.AddDbContext<LicitatiiDBContext>(opt=>{
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddMvc().AddJsonOptions(opt => {
-    opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+    opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
 });
 
 var app = builder.Build();
@@ -30,4 +31,5 @@ catch(Exception ex) {
     Console.WriteLine(ex.Message);
     throw new Exception("Eroare", ex);
 }
+
 app.Run();

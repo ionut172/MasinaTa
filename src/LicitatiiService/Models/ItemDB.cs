@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations.Schema;
-
+using MongoDB.Entities;
 namespace LicitatiiService.Models;
 
 [Table("Items")]
-public class ItemDB
+public class ItemDB 
 {
     public Guid Id { get; set; }
     public string Make { get; set; }

@@ -2,6 +2,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using LicitatiiService.Data;
 using LicitatiiService.DTO;
 using LicitatiiService.Models;
@@ -22,9 +23,14 @@ public class LicitatiiController : ControllerBase {
         _mapper = mapper;
     }
     [HttpGet]
-    public async Task <ActionResult<List<LicitatiiDTO>>> ToateLicitatiile(){
-        var licitatii = await _context.Licitatii.IgnoreAutoIncludes().Include(x=>x.Item).OrderBy(x => x.Item.Id).ToListAsync();
-        return _mapper.Map<List<LicitatiiDTO>>(licitatii);
+    public async Task <ActionResult<List<LicitatiiDTO>>> ToateLicitatiile(string date){
+        var query = _context.Licitatii.OrderBy(x=>x.Item.Make).AsQueryable();
+        if (!string.IsNullOrEmpty(date)){
+            query = query.Where(x=>x.LastUpdatedAt.CompareTo(DateTime.Parse(date).ToUniversalTime())>0);
+        }
+        return await query.ProjectTo<LicitatiiDTO>(_mapper.ConfigurationProvider).ToListAsync();
+        // var licitatii = await _context.Licitatii.IgnoreAutoIncludes().Include(x=>x.Item).OrderBy(x => x.Item.Id).ToListAsync();
+        // return _mapper.Map<List<LicitatiiDTO>>(licitatii);
     }
     [HttpGet("{id}")]
     public async Task<ActionResult<LicitatiiDTO>> LicitatieDupaID( Guid id) {
