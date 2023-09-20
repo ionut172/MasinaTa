@@ -116,3 +116,13 @@ c:/Users/ionut.plesescu/Desktop/MasinaTa/src/LicitatiiService/obj/Debug/net7.0/r
 /Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/LicitatiiService/obj/Debug/net7.0/LicitatiiService.pdb
 /Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/LicitatiiService/obj/Debug/net7.0/LicitatiiService.genruntimeconfig.cache
 /Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/LicitatiiService/obj/Debug/net7.0/ref/LicitatiiService.dll
+/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/LicitatiiService/bin/Debug/net7.0/MassTransit.dll
+/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/LicitatiiService/bin/Debug/net7.0/MassTransit.Abstractions.dll
+/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/LicitatiiService/bin/Debug/net7.0/MassTransit.RabbitMqTransport.dll
+/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/LicitatiiService/bin/Debug/net7.0/Microsoft.Extensions.Diagnostics.HealthChecks.dll
+/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/LicitatiiService/bin/Debug/net7.0/Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll
+/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/LicitatiiService/bin/Debug/net7.0/Microsoft.Extensions.Logging.Abstractions.dll
+/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/LicitatiiService/bin/Debug/net7.0/Microsoft.Extensions.Options.dll
+/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/LicitatiiService/bin/Debug/net7.0/RabbitMQ.Client.dll
+/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/LicitatiiService/bin/Debug/net7.0/Contracts.dll
+/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/LicitatiiService/bin/Debug/net7.0/Contracts.pdb

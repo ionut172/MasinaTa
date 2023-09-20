@@ -1,6 +1,7 @@
 using LicitatiiService.Data;
 using LicitatiiService.DTO;
 using LicitatiiService.RequestHelpers;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using MongoDB.Entities;
@@ -19,6 +20,18 @@ builder.Services.AddDbContext<LicitatiiDBContext>(opt =>
 builder.Services.AddEndpointsApiExplorer();
 // Se adauga automapper-ul Automapper;
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+// Adaugare MassTransit pentru async
+// pentru adaugare clasa de contracte - dotnet new classlib src/Contracts.
+// pentru a ezita duplicarea codului, dotnet sln add src/Contracts + dotnet add reference ../../src/Contracts in ambele 
+// foldere de servicii;
+
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.ConfigureEndpoints(context);
+    });
+});
 builder.Services.AddMvc().AddJsonOptions(opt =>
 {
     // Face suppress la json values by default ca $id, $values;
