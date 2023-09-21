@@ -21,6 +21,7 @@ public class LicitatiiCreatedConsumer : IConsumer<LicitatiiCreated>
             Console.WriteLine("---> Consuming licitatie created " + context.Message.Id);
             // Mapam in <Item> pe care il luam din (context.Message);
             var item = _mapper.Map<Item>(context.Message);
+            if ( item.Make == "Foo") throw new ArgumentException("Nu se poate vinde masina cu numele Foo");
             await item.SaveAsync();
             Console.WriteLine("---> Success " + context.Message.Id);
         }

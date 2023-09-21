@@ -1,7 +1,9 @@
+using LicitatiiService;
 using LicitatiiService.Data;
 using LicitatiiService.DTO;
 using LicitatiiService.RequestHelpers;
 using MassTransit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using MongoDB.Entities;
@@ -31,6 +33,21 @@ builder.Services.AddMassTransit(x =>
     {
         cfg.ConfigureEndpoints(context);
     });
+    x.AddEntityFrameworkOutbox<LicitatiiDBContext>(o => {
+        o.QueryDelay = TimeSpan.FromSeconds(10);
+        o.UsePostgres();
+        o.UseBusOutbox();
+        
+    });
+    x.AddConsumersFromNamespaceContaining<LicitatiiCreatedFaultsConsumer>();
+    x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("licitatii", false));
+});
+///Serviciu pentru autentificare cu identity server
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options=>{
+    options.Authority = builder.Configuration["IdentityServiceUrl"];
+    options.RequireHttpsMetadata = false;
+    options.TokenValidationParameters.ValidateAudience = false;
+    options.TokenValidationParameters.NameClaimType = "username";
 });
 builder.Services.AddMvc().AddJsonOptions(opt =>
 {
@@ -39,7 +56,8 @@ builder.Services.AddMvc().AddJsonOptions(opt =>
 });
 
 var app = builder.Build();
-
+///Mereu intaintea de auturization;
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

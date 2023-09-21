@@ -1,26 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/LicitatiiService/LicitatiiService.csproj": {}
+    "d:\\Repo\\MasinaTa\\MasinaTa\\src\\LicitatiiService\\LicitatiiService.csproj": {}
   },
   "projects": {
-    "/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/Contracts/Contracts.csproj": {
+    "d:\\Repo\\MasinaTa\\MasinaTa\\src\\Contracts\\Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/Contracts/Contracts.csproj",
+        "projectUniqueName": "d:\\Repo\\MasinaTa\\MasinaTa\\src\\Contracts\\Contracts.csproj",
         "projectName": "Contracts",
-        "projectPath": "/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/Contracts/Contracts.csproj",
-        "packagesPath": "/Users/ionutgabriel/.nuget/packages/",
-        "outputPath": "/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/Contracts/obj/",
+        "projectPath": "d:\\Repo\\MasinaTa\\MasinaTa\\src\\Contracts\\Contracts.csproj",
+        "packagesPath": "C:\\Users\\ionut.plesescu\\.nuget\\packages\\",
+        "outputPath": "d:\\Repo\\MasinaTa\\MasinaTa\\src\\Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/ionutgabriel/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ionut.plesescu\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -54,36 +53,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.304/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/LicitatiiService/LicitatiiService.csproj": {
+    "d:\\Repo\\MasinaTa\\MasinaTa\\src\\LicitatiiService\\LicitatiiService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/LicitatiiService/LicitatiiService.csproj",
+        "projectUniqueName": "d:\\Repo\\MasinaTa\\MasinaTa\\src\\LicitatiiService\\LicitatiiService.csproj",
         "projectName": "LicitatiiService",
-        "projectPath": "/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/LicitatiiService/LicitatiiService.csproj",
-        "packagesPath": "/Users/ionutgabriel/.nuget/packages/",
-        "outputPath": "/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/LicitatiiService/obj/",
+        "projectPath": "d:\\Repo\\MasinaTa\\MasinaTa\\src\\LicitatiiService\\LicitatiiService.csproj",
+        "packagesPath": "C:\\Users\\ionut.plesescu\\.nuget\\packages\\",
+        "outputPath": "d:\\Repo\\MasinaTa\\MasinaTa\\src\\LicitatiiService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/ionutgabriel/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ionut.plesescu\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
-          "/usr/local/share/dotnet/sdk/7.0.304/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/Contracts/Contracts.csproj": {
-                "projectPath": "/Users/ionutgabriel/Projects/Biciclete/MasinaTa/MasinaTa/src/Contracts/Contracts.csproj"
+              "d:\\Repo\\MasinaTa\\MasinaTa\\src\\Contracts\\Contracts.csproj": {
+                "projectPath": "d:\\Repo\\MasinaTa\\MasinaTa\\src\\Contracts\\Contracts.csproj"
               }
             }
           }
@@ -102,9 +99,17 @@
               "target": "Package",
               "version": "[12.0.1, )"
             },
+            "MassTransit.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
             "MassTransit.RabbitMQ": {
               "target": "Package",
               "version": "[8.1.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[7.0.11, )"
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
@@ -148,7 +153,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.304/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
