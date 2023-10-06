@@ -7,6 +7,8 @@ EXPOSE 80
 COPY MasinaTa.sln MasinaTa.sln
 COPY src/LicitatiiService/LicitatiiService.csproj src/LicitatiiService/LicitatiiService.csproj
 COPY src/SearchService/SearchService.csproj src/SearchService/SearchService.csproj
+COPY src/BiddingService/BiddingService.csproj src/BiddingService/BiddingService.csproj
+COPY src/NotificationService/NotificationService.csproj src/NotificationService/NotificationService.csproj
 COPY src/GatewayService/GatewayService.csproj src/GatewayService/GatewayService.csproj
 COPY src/IdentityServer/IdentityServer.csproj src/IdentityServer/IdentityServer.csproj
 COPY src/Contracts/Contracts.csproj src/Contracts/Contracts.csproj

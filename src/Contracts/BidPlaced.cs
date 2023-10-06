@@ -1,0 +1,11 @@
+namespace Contracts;
+
+public class BidPlaced
+{
+    public string Id { get; set; }
+    public string licitatieId { get; set; }
+    public string Bidder { get; set; }
+    public DateTime BidTime { get; set; }
+    public int pretRezervare { get; set; }
+    public string BidStatus { get; set; }
+}

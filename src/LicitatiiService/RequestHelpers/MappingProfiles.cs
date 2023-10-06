@@ -14,5 +14,6 @@ public class MappingProfiles : Profile
         CreateMap<CreateLicitatiiDTO, Licitatie>().ForMember(d => d.Item, o => o.MapFrom(s => s));
         CreateMap<CreateLicitatiiDTO, ItemDB>();
         CreateMap<LicitatiiDTO, LicitatiiCreated>();
+        CreateMap<Licitatie, LicitatiiUpdated>();
     }
 }

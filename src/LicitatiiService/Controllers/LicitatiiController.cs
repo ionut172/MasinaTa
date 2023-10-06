@@ -11,6 +11,7 @@ using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace LicitatiiService.Controllers;
 
@@ -59,62 +60,85 @@ public class LicitatiiController : ControllerBase
     // adaug mesaj catre mass transit liniile 68-69-70
     public async Task<ActionResult<LicitatiiDTO>> CreateLicitatie(CreateLicitatiiDTO licitatieDto)
     {
+        try{
         var licitatie = _mapper.Map<Licitatie>(licitatieDto);
         licitatie.Vanzator = User.Identity.Name;
         _context.Licitatii.Add(licitatie);
-         var newLicitatie = _mapper.Map<LicitatiiDTO>(licitatie);
-        
+        var newLicitatie = _mapper.Map<LicitatiiDTO>(licitatie);
+
         await _publishEndpoint.Publish(_mapper.Map<LicitatiiCreated>(newLicitatie));
         var result = await _context.SaveChangesAsync() > 0;
         if (!result)
         {
             return BadRequest("Nu a fost adaugat nimic!");
         }
-       
         return CreatedAtAction(nameof(LicitatieDupaID), new { licitatie.Id }, newLicitatie);
 
+        }
+        catch (Exception ex) {
+            throw new Exception (ex.ToString());
+        }
+        
+
+        
     }
     [Authorize]
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateLicitatie(UpdateLicitatiiDTO licitatieDTO, Guid id)
+{
+    var licitatie = await _context.Licitatii.Include(x => x.Item).FirstOrDefaultAsync(x => x.Id == id);
+
+    if (licitatie == null)
     {
-        var licitatie = await _context.Licitatii.Include(x => x.Item).FirstOrDefaultAsync(x => x.Id == id);
-        if(licitatie.Vanzator != User.Identity.Name) return Forbid();
-        if (licitatie != null)
-        {
-
-            licitatie.Item.Make = licitatieDTO.Make ?? licitatie.Item.Make;
-            licitatie.Item.ModelMasina = licitatieDTO.ModelMasina ?? licitatie.Item.ModelMasina;
-            licitatie.Item.Culoare = licitatieDTO.Culoare ?? licitatie.Item.Culoare;
-            licitatie.Item.Kilometraj = licitatieDTO.Kilometraj ?? licitatie.Item.Kilometraj;
-            licitatie.Item.An = licitatieDTO.An ?? licitatie.Item.An;
-            await _publishEndpoint.Publish(_mapper.Map<LicitatiiUpdated>(licitatie));
-            var result = await _context.SaveChangesAsync() > 0;
-
-            if (!result)
-            {
-                return BadRequest("Nu s-a facut modificarea");
-            }
-
-            return Ok();
-        }
-        else
-        {
-            return NotFound();
-        }
+        return NotFound();
     }
+
+    if (licitatie.Vanzator != User.Identity.Name)
+    {
+        return Forbid();
+    }
+
+    // Update properties from DTO to entity
+    licitatie.Item.Make = licitatieDTO.Make ?? licitatie.Item.Make;
+    licitatie.Item.ModelMasina = licitatieDTO.ModelMasina ?? licitatie.Item.ModelMasina;
+    licitatie.Item.Culoare = licitatieDTO.Culoare ?? licitatie.Item.Culoare;
+    licitatie.Item.Kilometraj = licitatieDTO.Kilometraj ?? licitatie.Item.Kilometraj;
+    licitatie.Item.An = licitatieDTO.An ?? licitatie.Item.An;
+
+    // Use AutoMapper to map the updated Licitatie to LicitatiiUpdated
+    var licitatiiUpdatedEvent = _mapper.Map<LicitatiiUpdated>(licitatie);
+
+    // Publish the event
+    await _publishEndpoint.Publish(licitatiiUpdatedEvent);
+
+    // Save changes to the database
+    var result = await _context.SaveChangesAsync() > 0;
+
+    if (result)
+    {
+        return Ok();
+    }
+    else
+    {
+        return BadRequest("Nu s-a facut modificarea. Eroare.");
+    }
+}
+
+
+
+
     [Authorize]
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteLicitatie(Guid id)
     {
         var licitatie = await _context.Licitatii.FirstOrDefaultAsync(x => x.Id == id);
-        if (licitatie.Vanzator != User.Identity.Name) return Forbid();
+        if (licitatie.Vanzator != User.Identity.Name) return Forbid("Eroare");
         if (licitatie == null)
         {
             return BadRequest("Nu s-a gasit licitatia");
         }
         _context.Licitatii.Remove(licitatie);
-        await _publishEndpoint.Publish<LicitatiiDeleted>(new LicitatiiDeleted{ Id = licitatie.Id.ToString()});
+        await _publishEndpoint.Publish<LicitatiiDeleted>(new LicitatiiDeleted { Id = licitatie.Id.ToString() });
         var result = _context.SaveChangesAsync();
         if (result != null)
         {

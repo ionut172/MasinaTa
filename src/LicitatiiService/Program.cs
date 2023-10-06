@@ -1,10 +1,18 @@
+using System.Buffers;
+using System.Net;
+using Contracts;
 using LicitatiiService;
 using LicitatiiService.Data;
 using LicitatiiService.DTO;
 using LicitatiiService.RequestHelpers;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Logging;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.IdentityModel.Validators;
 using MongoDB.Driver;
 using MongoDB.Entities;
 
@@ -46,13 +54,27 @@ builder.Services.AddMassTransit(x =>
     x.AddConsumersFromNamespaceContaining<LicitatiiCreatedFaultsConsumer>();
     x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("licitatii", false));
 });
+ServicePointManager.Expect100Continue = true;
+ServicePointManager.SecurityProtocol =
+    SecurityProtocolType.Tls |
+    SecurityProtocolType.Tls11 |
+    SecurityProtocolType.Tls12;
+
 ///Serviciu pentru autentificare cu identity server
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options=>{
-    options.Authority = builder.Configuration["IdentityServiceUrl"];
-    options.RequireHttpsMetadata = false;
-    options.TokenValidationParameters.ValidateAudience = false;
-    options.TokenValidationParameters.NameClaimType = "username";
-});
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = builder.Configuration["IdentityServiceUrl"];
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters.ValidateAudience = false;
+        options.TokenValidationParameters.NameClaimType = "username";
+        IdentityModelEventSource.ShowPII = true;
+
+
+    });
+
+
+
 builder.Services.AddMvc().AddJsonOptions(opt =>
 {
     // Face suppress la json values by default ca $id, $values;
@@ -60,7 +82,7 @@ builder.Services.AddMvc().AddJsonOptions(opt =>
 });
 
 var app = builder.Build();
-///Mereu intaintea de auturization;
+///Mereu intaintea de autorization;
 app.UseAuthentication();
 app.UseAuthorization();
 

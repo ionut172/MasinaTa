@@ -21,7 +21,7 @@ public class SearchController : ControllerBase
         }
         query = searchParams.OrderBy switch
         {
-            "producator" => query.Sort(x => x.Ascending(a => a.Make)),
+            "producator" => query.Sort(x => x.Ascending(a => a.Make)).Sort(x=> x.Ascending(a=>a.ModelMasina)),
             "new" => query.Sort(x => x.Descending(a => a.CreatedAt)),
             _ => query.Sort(x => x.Ascending(a => a.LicitatieEnd))
 
@@ -30,6 +30,7 @@ public class SearchController : ControllerBase
         {
             "finished" => query.Match(x => x.LicitatieEnd < DateTime.UtcNow),
             "endingSoon" => query.Match(x => x.LicitatieEnd < DateTime.UtcNow.AddHours(5) && x.LicitatieEnd > DateTime.UtcNow),
+            "live"=> query.Match(x=>x.LicitatieEnd > DateTime.UtcNow.AddHours(1)),
             _ => query.Match(x => x.LicitatieEnd > DateTime.UtcNow)
         };
         if (!string.IsNullOrEmpty(searchParams.Vanzator))
