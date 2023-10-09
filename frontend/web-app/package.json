@@ -36,6 +36,7 @@
     "tailwindcss": "latest",
     "typescript": "latest",
     "tailwindcss": "latest",
-    "typescript": "latest"
+    "typescript": "latest",
+    "@tailwindcss/aspect-ratio":"latest"
   }
 }
