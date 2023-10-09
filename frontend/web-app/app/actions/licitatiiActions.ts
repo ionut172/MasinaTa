@@ -1,5 +1,5 @@
 'use server'
-import { PagedResults } from "@/types";
+import { Bid, PagedResults } from "@/types";
 import { Licitatii } from "@/types";
 import { getTokenWorkAround } from "./authActions";
 import { fetchWrapper } from "@/lib/fetchWrapper";
@@ -34,4 +34,10 @@ export async function updateLicitatii(data: FieldValues, id: string) {
 }
 export async function deleteLicitatii(id: string){
     return await fetchWrapper.del(`licitatii/${id}`);
+}
+export async function getBids(id:string):Promise<Bid[]>{
+    return await fetchWrapper.get(`bids/${id}`);
+}
+export async function placeBid(licitatieId: string, pretRezervare: number) {
+    return await fetchWrapper.post(`bids?licitatieId=${licitatieId}&pretRezervare=${pretRezervare}`, {});
 }

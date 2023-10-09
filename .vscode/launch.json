@@ -3,6 +3,12 @@
     "requireExactSource": "false",
     "configurations": [
         {
+            "command": "npm start",
+            "name": "Run npm start",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach"
@@ -22,7 +28,7 @@
             "name": "Launch Chrome",
             "request": "launch",
             "type": "chrome",
-            "url": "http://localhost:7003",
+            "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}"
         },
        

@@ -19,5 +19,14 @@ export type Licitatii = {
     imagineUrl: string;
     id: string;
   }
+export type Bid = {
+    status: any; 
+    id: string,
+    licitatieId: string,
+    vanzator: string,
+    bidTime: string,
+    pretRezervare: number,
+    
+}
   
   

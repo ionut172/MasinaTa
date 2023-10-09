@@ -4,6 +4,7 @@ import CountdownTimer from "./CountdownTimer";
 import LicitatiiImage from "./LicitatiiImage";
 import { Licitatii } from "@/types";
 import Link from "next/link";
+import CurrentBid from "./CurrentBid";
 type Props = {
     licitatie: Licitatii,
 
@@ -18,6 +19,9 @@ export default function LicitatiiCard({licitatie}: Props) {
             <LicitatiiImage imagineUrl={licitatie.imagineUrl}/>
             <div className="absolute bottom-2 left-2">
             <CountdownTimer licitatieEnd={licitatie.licitatieEnd}/>
+            </div>
+            <div className="absolute top-2 right-2">
+            <CurrentBid pretRezervare={licitatie.pretRezervare} celMaiMareBid={licitatie.celMaiMareBid}/>
             </div>
             </div>
            

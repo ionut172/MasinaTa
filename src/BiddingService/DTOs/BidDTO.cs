@@ -8,7 +8,7 @@ public class BidDTO {
     public string ID { get; set; }
     public string licitatieId {get;set;}
     public string vanzator {get;set;}
-    public DateTime BidTime {get;set;}
+    public DateTime BidTime {get;set;} = DateTime.UtcNow;
     public int pretRezervare {get;set;}
     public string Status{get;set;}
 }

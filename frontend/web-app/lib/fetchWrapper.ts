@@ -63,5 +63,5 @@ export const fetchWrapper = {
     get,
     post,
     put,
-    del
+    del,
 }
